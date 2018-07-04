@@ -21,7 +21,7 @@ java -jar bdp2hive-1.0.jar [hive|sqoop] <args>
 其中[hive|sqoop]表示为子命令，必选其一，hive表示是生成hive分区表组件，sqoop表示是生成sqoop组件，下面介绍具体的参数：
 ##### 1、hive子命令
 ```
-usage: hive [-h] [-N <arg>] [-n <arg>] [-U <arg>] [-u <arg>] [-W] [-w <arg>]
+usage: java -jar bdp2hive-1.0.jar hive [-h] [-N <arg>] [-n <arg>] [-U <arg>] [-u <arg>] [-W] [-w <arg>]
  -h,--help                   Print help
  -N,--hive_user <arg>        The username of Hive #hive数据库用户名
  -n,--mysql_user <arg>       The username of MySQL #mysql数据库用户名
@@ -34,7 +34,7 @@ usage: hive [-h] [-N <arg>] [-n <arg>] [-U <arg>] [-u <arg>] [-W] [-w <arg>]
 ##### 2、sqoop子命令
 相比于hive子命令，sqoop子命令输入的参数相对较少的多：
 ```
-usage: sqoop [-f <arg>] [-h]
+usage: java -jar bdp2hive-1.0.jar sqoop [-f <arg>] [-h]
  -f,--file_path <arg>   The path of the excel file  #刘博那边处理好的数据库表与数据集的对照关系excel文件（可指定目录，意为目录下的所有excel文件）
  -h,--help              Print help  #打印帮助
 
