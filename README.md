@@ -6,21 +6,21 @@
 ##### 项目结构
 
 ```
-─src                                                                                                                                                                   
-   ├─main                                                                                                                                                              
-   │  ├─java                                                                                                                                                          
-   │  │  └─com                                                                                                                                                       
-   │  │      └─cecdata                                                                                                                                               
-   │  │          └─bdp2hive                                                                                                                                          
-   │  │              ├─common                                                                                                                                        
-   │  │              │  ├─mapper                                                                                                                                    
-   │  │              │  └─vo                                                                                                                                        
-   │  │              ├─hive                                                                                                                                          
-   │  │              └─sqoop                                                                                                                                         
-   │  │                  ├─service                                                                                                                                   
-   │  │                  └─util                                                                                                                                      
-   │  └─resources                                                                                                                                                     
-   └─test                                                                                                                                                              
+─src
+   ├─main
+   │  ├─java
+   │  │  └─com
+   │  │      └─cecdata
+   │  │          └─bdp2hive
+   │  │              ├─common
+   │  │              │  ├─mapper
+   │  │              │  └─vo
+   │  │              ├─hive
+   │  │              └─sqoop
+   │  │                  ├─service
+   │  │                  └─util
+   │  └─resources
+   └─test
        └─java
 ```
 
