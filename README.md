@@ -3,6 +3,27 @@
 #### 一、概述
 项目主要是集成生成sqoop脚本和创建hive分区表组件。生成sqoop脚本组件主要通过调取治理平台接口获取表字段与数据集之间的对照关系的SQL语句，通过模板拼接成sqoop脚本，上传服务器执行；hive分区表生成组件主要是通过获取数据集及数据集item的code，数据集code作为hive表名，数据集item code作为hive分区表字段，同时加入相关字段，形成hive表的基本结构。
 
+##### 项目结构
+
+```
+─src                                                                                                                                                                   
+   ├─main                                                                                                                                                              
+   │  ├─java                                                                                                                                                          
+   │  │  └─com                                                                                                                                                       
+   │  │      └─cecdata                                                                                                                                               
+   │  │          └─bdp2hive                                                                                                                                          
+   │  │              ├─common                                                                                                                                        
+   │  │              │  ├─mapper                                                                                                                                    
+   │  │              │  └─vo                                                                                                                                        
+   │  │              ├─hive                                                                                                                                          
+   │  │              └─sqoop                                                                                                                                         
+   │  │                  ├─service                                                                                                                                   
+   │  │                  └─util                                                                                                                                      
+   │  └─resources                                                                                                                                                     
+   └─test                                                                                                                                                              
+       └─java
+```
+
 #### 二、打包
 通过maven组件整体打成jar包，如下：
 ```
