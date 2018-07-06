@@ -4,6 +4,8 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.cecdata.bdp2hive.common.EnvInit;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,28 +25,30 @@ import java.util.Map;
  */
 public class GenerateHivePartitionTable {
 
+    private Logger logger = LoggerFactory.getLogger(GenerateHivePartitionTable.class);
+
     private void main(String[] args) throws SQLException {
         // 使用Apache common cli封装并解析输入参数
         Options options = new Options();
         Option opt = new Option("h", "help", false, "Print help");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("U", "hive_url", true, "The url of Hive connect");
+        opt = new Option("U", "hive-url", true, "The url of Hive connect");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("N", "hive_user", true, "The username of Hive");
+        opt = new Option("N", "hive-user", true, "The username of Hive");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("W", "hive_password", false, "The password of Hive");
+        opt = new Option("W", "hive-password", false, "The password of Hive");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("u", "mysql_url", true, "The url of MySQL");
+        opt = new Option("u", "mysql-url", true, "The url of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("n", "mysql_user", true, "The username of MySQL");
+        opt = new Option("n", "mysql-user", true, "The username of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("w", "mysql_password", true, "The password of MySQL");
+        opt = new Option("w", "mysql-password", true, "The password of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
 
@@ -57,17 +61,21 @@ public class GenerateHivePartitionTable {
             // 当输入参数为空或者"-h" "--help"时打印帮助信息
             commandLine = parser.parse(options, args);
             if (commandLine.hasOption("h") || commandLine.getOptions().length == 0) {
+                logger.info("for more information please use \"-h\" or \"--help\"");
                 helpFormatter.printHelp("hive", options, true);
                 System.exit(-1);
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            helpFormatter.printHelp("hive", options, true);
+            System.exit(-1);
         }
 
         // 将所有的参数按照短字符名称保存在map里
         Map<String, String> params = new HashMap<String, String>();
         Option[] opts = commandLine.getOptions();
         if (opts != null) {
+            logger.info("assembly arguments");
             for (Option option : opts) {
                 String longOpt = option.getLongOpt();
                 String shortOpt = option.getOpt();
@@ -75,6 +83,7 @@ public class GenerateHivePartitionTable {
                 params.put(shortOpt, optionValue);
             }
         } else {
+            logger.error("the opts was null");
             System.exit(-1);
         }
 
@@ -117,8 +126,10 @@ public class GenerateHivePartitionTable {
             sb.append(" partitioned by(SJYYLJGDM_PARTITION string)");
             sb.append(" row format delimited fields terminated by '^' stored as textfile");
             System.out.println(sb.toString());
+            logger.info("create table sql will be executing:{}", sb.toString());
             // 执行SQL语句创建hive分区表
             hiveStatement.execute(sb.toString());
+            logger.info("the table {} was generated", tableName);
         }
 
     }

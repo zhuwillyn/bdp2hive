@@ -15,6 +15,8 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.io.File;
@@ -34,6 +36,8 @@ import java.util.Set;
  */
 public class SqoopMainApplication {
 
+    private Logger logger = LoggerFactory.getLogger(SqoopMainApplication.class);
+
     private static Mapper mapper;
     String refUrl = PropertiesUtil.get(Constant.SQOOP.REF_URL);
     String sqlUrl = PropertiesUtil.get(Constant.SQOOP.SQL_URL);
@@ -41,13 +45,14 @@ public class SqoopMainApplication {
     String script = PropertiesUtil.get(Constant.SQOOP.SCRIPT_PARTITION);
 
     private void main(String[] args) {
+        logger.info("resolved arguments");
         // 使用Apache common cli解析输入参数
         Options options = new Options();
         Option opt = new Option("h", "help", false, "Print help");
         opt.setRequired(false);
         options.addOption(opt);
 
-        opt = new Option("f", "file_path", true, "The path of the excel file");
+        opt = new Option("f", "file-path", true, "The path of the excel file");
         opt.setRequired(false);
         options.addOption(opt);
 
@@ -60,11 +65,14 @@ public class SqoopMainApplication {
             // 当输入参数为空或者"-h" "--help"时打印帮助信息
             commandLine = parser.parse(options, args);
             if (commandLine.hasOption("h") || commandLine.getOptions().length == 0) {
+                logger.info("for more information please use \"-h\" or \"--help\"");
                 helpFormatter.printHelp("sqoop", options, true);
                 System.exit(-1);
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            helpFormatter.printHelp("hive", options, true);
+            System.exit(-1);
         }
         // 直接获取参数值
         String filePath = commandLine.getOptionValue("file_path");
