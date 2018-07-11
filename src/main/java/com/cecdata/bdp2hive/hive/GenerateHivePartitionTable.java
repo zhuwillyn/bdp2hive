@@ -2,6 +2,7 @@ package com.cecdata.bdp2hive.hive;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
+import com.cecdata.bdp2hive.common.Constant;
 import com.cecdata.bdp2hive.common.EnvInit;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
@@ -30,25 +31,25 @@ public class GenerateHivePartitionTable {
     private void main(String[] args) throws SQLException {
         // 使用Apache common cli封装并解析输入参数
         Options options = new Options();
-        Option opt = new Option("h", "help", false, "Print help");
+        Option opt = new Option(Constant.Cli.Hive.HELP_SHORT, Constant.Cli.Hive.HELP_LONG, false, "Print help");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("U", "hive-url", true, "The url of Hive connect");
+        opt = new Option(Constant.Cli.Hive.HIVE_URL_SHORT, Constant.Cli.Hive.HIVE_URL_LONG, true, "The url of Hive connect");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("N", "hive-user", true, "The username of Hive");
+        opt = new Option(Constant.Cli.Hive.HIVE_USER_SHORT, Constant.Cli.Hive.HIVE_USER_LONG, true, "The username of Hive");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("W", "hive-password", false, "The password of Hive");
+        opt = new Option(Constant.Cli.Hive.HIVE_PASSWORD_SHORT, Constant.Cli.Hive.MYSQL_PASSWORD_LONG, false, "The password of Hive");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("u", "mysql-url", true, "The url of MySQL");
+        opt = new Option(Constant.Cli.Hive.MYSQL_URL_SHORT, Constant.Cli.Hive.MYSQL_URL_LONG, true, "The url of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("n", "mysql-user", true, "The username of MySQL");
+        opt = new Option(Constant.Cli.Hive.MYSQL_USER_SHORT, Constant.Cli.Hive.MYSQL_USER_LONG, true, "The username of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
-        opt = new Option("w", "mysql-password", true, "The password of MySQL");
+        opt = new Option(Constant.Cli.Hive.MYSQL_PASSWORD_SHORT, Constant.Cli.Hive.MYSQL_PASSWORD_LONG, true, "The password of MySQL");
         opt.setRequired(false);
         options.addOption(opt);
 
@@ -113,6 +114,8 @@ public class GenerateHivePartitionTable {
             String tableName = entry.getKey();
             List<String> fields = entry.getValue();
             StringBuffer sb = new StringBuffer("create table if not exists " + tableName + "(");
+            // 时间戳字段
+            sb.append("CECD_CNVT_TIME string,");
             for (int i = 0; i < fields.size(); i++) {
                 String field = fields.get(i);
                 String temp;
