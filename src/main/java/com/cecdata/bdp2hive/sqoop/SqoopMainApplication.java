@@ -29,7 +29,7 @@ public class SqoopMainApplication {
 
     static String script = PropertiesUtil.get(Constant.SQOOP.SCRIPT_PARTITION);
 
-    public static void main(String[] args) {
+    private void main(String[] args) {
         logger.info("resolved arguments");
         // 使用Apache common cli解析输入参数
         Options options = new Options();
@@ -97,7 +97,7 @@ public class SqoopMainApplication {
         start(arguments);
     }
 
-    private static void start(Map<String, String> params) {
+    private void start(Map<String, String> params) {
         try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File("./sqoop_scripts_test.sh")));) {
             String orgCodes = params.get(Constant.Cli.Sqoop.ORG_CODE_SHORT);
             String url = params.get(Constant.Cli.Sqoop.MYSQL_URL_SHORT);
@@ -169,7 +169,7 @@ public class SqoopMainApplication {
     }
 
     // 组装SQL语句
-    private static String assembledSQL(Map<String, String> segments, RefInfo refInfo) {
+    private String assembledSQL(Map<String, String> segments, RefInfo refInfo) {
         String orgName = refInfo.getOrgName();
         String orgCode = refInfo.getOrgCode();
         String databaseName = refInfo.getDatabaseName();
@@ -194,7 +194,7 @@ public class SqoopMainApplication {
     }
 
     // 组装脚本，将脚本模板中的参数替换
-    private static String assembledScript(RefInfo refInfo, String sql, String sqoopBinPath, String hiveDatabase) {
+    private String assembledScript(RefInfo refInfo, String sql, String sqoopBinPath, String hiveDatabase) {
         String databaseAddr = refInfo.getDatabaseAddr();
         String port = refInfo.getPort();
         String databaseName = refInfo.getDatabaseName();
@@ -214,7 +214,7 @@ public class SqoopMainApplication {
     }
 
     // 处理对照关系信息结果集
-    private static Map<String, List<RefInfo>> processRefResult(ResultSet resultSet) {
+    private Map<String, List<RefInfo>> processRefResult(ResultSet resultSet) {
         Map<String, List<RefInfo>> maps = new HashMap<String, List<RefInfo>>();
         if (resultSet != null) {
             try {
@@ -249,7 +249,7 @@ public class SqoopMainApplication {
     }
 
     // 处理数据集item结果集
-    private static List<String> processStructItemResult(ResultSet resultSet) {
+    private List<String> processStructItemResult(ResultSet resultSet) {
         List<String> itemCodes = new LinkedList<String>();
         if (resultSet != null) {
             try {
