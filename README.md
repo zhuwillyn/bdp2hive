@@ -55,8 +55,12 @@ usage: java -jar bdp2hive-1.0.jar hive [-h] [-N <arg>] [-n <arg>] [-U <arg>] [-u
 ##### 2、sqoop子命令
 相比于hive子命令，sqoop子命令输入的参数相对较少的多：
 ```
-usage: java -jar bdp2hive-1.0.jar sqoop [-f <arg>] [-h]
- -f,--file_path <arg>   The path of the excel file  #刘博那边处理好的数据库表与数据集的对照关系excel文件（可指定目录，意为目录下的所有excel文件）
- -h,--help              Print help  #打印帮助
-
+usage: hive [-d <arg>] [-h] -n <arg> [-o <arg>] -s <arg> -u <arg> -w <arg>
+ -d,--hive_database <arg>    The database of Hive   #hive数据库，需要导入的
+ -h,--help                   Print help #打印帮助
+ -n,--mysql_user <arg>       The username of database   #数据库用户名
+ -o,--org_code <arg>         The organize code, multi value split by ','    #机构代码，多个用英文逗号隔开
+ -s,--sqoop_cmd_path <arg>   The binary path of SQOOP   #sqoop bin路径
+ -u,--mysql_url <arg>        The url of mysql   #数据库连接
+ -w,--mysql_password <arg>   The password for user of database  #数据密码
 ```
