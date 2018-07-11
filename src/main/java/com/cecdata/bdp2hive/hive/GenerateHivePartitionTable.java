@@ -32,22 +32,22 @@ public class GenerateHivePartitionTable {
         opt.setRequired(false);
         options.addOption(opt);
         opt = new Option(Constant.Cli.Hive.HIVE_URL_SHORT, Constant.Cli.Hive.HIVE_URL_LONG, true, "The url of Hive connect");
-        opt.setRequired(false);
+        opt.setRequired(true);
         options.addOption(opt);
         opt = new Option(Constant.Cli.Hive.HIVE_USER_SHORT, Constant.Cli.Hive.HIVE_USER_LONG, true, "The username of Hive");
-        opt.setRequired(false);
+        opt.setRequired(true);
         options.addOption(opt);
-        opt = new Option(Constant.Cli.Hive.HIVE_PASSWORD_SHORT, Constant.Cli.Hive.MYSQL_PASSWORD_LONG, false, "The password of Hive");
+        opt = new Option(Constant.Cli.Hive.HIVE_PASSWORD_SHORT, Constant.Cli.Hive.HIVE_PASSWORD_LONG, true, "The password of Hive");
         opt.setRequired(false);
         options.addOption(opt);
         opt = new Option(Constant.Cli.Hive.MYSQL_URL_SHORT, Constant.Cli.Hive.MYSQL_URL_LONG, true, "The url of MySQL");
-        opt.setRequired(false);
+        opt.setRequired(true);
         options.addOption(opt);
         opt = new Option(Constant.Cli.Hive.MYSQL_USER_SHORT, Constant.Cli.Hive.MYSQL_USER_LONG, true, "The username of MySQL");
-        opt.setRequired(false);
+        opt.setRequired(true);
         options.addOption(opt);
         opt = new Option(Constant.Cli.Hive.MYSQL_PASSWORD_SHORT, Constant.Cli.Hive.MYSQL_PASSWORD_LONG, true, "The password of MySQL");
-        opt.setRequired(false);
+        opt.setRequired(true);
         options.addOption(opt);
 
         CommandLineParser parser = new PosixParser();

@@ -51,17 +51,17 @@ public class Constant {
             public static final String HELP_SHORT = "h";
             public static final String HELP_LONG = "help";
             public static final String SQOOP_BIN_PATH_SHORT = "s";
-            public static final String SQOOP_BIN_PATH_LONG = "sqoop_cmd_path";
+            public static final String SQOOP_BIN_PATH_LONG = "sqoop-cmd-path";
             public static final String MYSQL_URL_SHORT = "u";
-            public static final String MYSQL_URL_LONG = "mysql_url";
+            public static final String MYSQL_URL_LONG = "mysql-url";
             public static final String MYSQL_USER_SHORT = "n";
-            public static final String MYSQL_USER_LONG = "mysql_user";
+            public static final String MYSQL_USER_LONG = "mysql-user";
             public static final String MYSQL_PASSWORD_SHORT = "w";
-            public static final String MYSQL_PASSWORD_LONG = "mysql_password";
+            public static final String MYSQL_PASSWORD_LONG = "mysql-password";
             public static final String ORG_CODE_SHORT = "o";
-            public static final String ORG_CODE_LONG = "org_code";
+            public static final String ORG_CODE_LONG = "org-code";
             public static final String HIVE_DATABASE_SHORT = "d";
-            public static final String HIVE_DATABASE_LONG = "hive_database";
+            public static final String HIVE_DATABASE_LONG = "hive-database";
         }
 
         public static class Hive {
