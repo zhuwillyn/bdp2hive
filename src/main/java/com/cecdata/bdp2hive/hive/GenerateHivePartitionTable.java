@@ -111,18 +111,13 @@ public class GenerateHivePartitionTable {
             String tableName = entry.getKey();
             List<String> fields = entry.getValue();
             StringBuffer sb = new StringBuffer("create table if not exists " + tableName + "(");
-            // 时间戳字段
-            sb.append("CECD_CNVT_TIME string,");
             for (int i = 0; i < fields.size(); i++) {
                 String field = fields.get(i);
-                String temp;
-                if (i == (fields.size() - 1)) {
-                    temp = field + " string)";
-                } else {
-                    temp = field + " string,";
-                }
+                String temp = field + " string,";
                 sb.append(temp);
             }
+            // 时间戳字段
+            sb.append("CECD_CNVT_TIME string)");
             sb.append(" partitioned by(SJYYLJGDM_PARTITION string)");
             sb.append(" row format delimited fields terminated by '^' stored as textfile");
             System.out.println(sb.toString());

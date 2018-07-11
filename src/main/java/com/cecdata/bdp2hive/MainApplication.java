@@ -1,6 +1,5 @@
 package com.cecdata.bdp2hive;
 
-import org.apache.commons.cli.UnrecognizedOptionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,7 @@ public class MainApplication {
                 logger.info("please type [hive|sqoop] to start programs");
                 System.exit(-1);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
         }

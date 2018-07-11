@@ -202,13 +202,13 @@ public class SqoopMainApplication {
         String username = refInfo.getUsername();
         String password = refInfo.getPassword();
         String structCode = refInfo.getStructCode();
-        if (StringUtils.isEmpty(hiveDatabase)){
+        if (StringUtils.isEmpty(hiveDatabase)) {
             hiveDatabase = "default";
         }
         String finalScript = script.replace("${sqoop_path}", sqoopBinPath).replace("${ip}", databaseAddr).replace("${port}", port)
                 .replace("${database}", databaseName).replace("${username}", username)
                 .replace("${password}", password).replace("${hdfs_path}", structCode)
-                .replace("${sql}", sql).replace("${hive_database}",hiveDatabase).replace("${hive_table}", structCode)
+                .replace("${sql}", sql).replace("${hive_database}", hiveDatabase).replace("${hive_table}", structCode)
                 .replace("${partition_value}", orgCode);
         return finalScript;
     }
