@@ -1,9 +1,6 @@
 package com.cecdata.bdp2hive.hive;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.pool.DruidPooledConnection;
 import com.cecdata.bdp2hive.common.Constant;
-import com.cecdata.bdp2hive.common.EnvInit;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
