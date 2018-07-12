@@ -1,5 +1,8 @@
 package com.cecdata.bdp2hive;
 
+import com.cecdata.bdp2hive.hive.GenerateHivePartitionTable;
+import com.cecdata.bdp2hive.log.LogApplication;
+import com.cecdata.bdp2hive.sqoop.SqoopMainApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,13 +30,18 @@ public class MainApplication {
             // 判断子命令进而利用反射执行不同类的启动方法
             if ("hive".equals(args[0].toLowerCase())) {
                 logger.info("enter sub command: hive");
-                Class<?> clazz = Class.forName("com.cecdata.bdp2hive.hive.GenerateHivePartitionTable");
+                Class<GenerateHivePartitionTable> clazz = GenerateHivePartitionTable.class;
                 Method method = clazz.getDeclaredMethod("main", String[].class);
                 method.setAccessible(true);
                 method.invoke(clazz.newInstance(), new Object[]{args});
             } else if ("sqoop".equals(args[0].toLowerCase())) {
                 logger.info("enter sub command: sqoop");
-                Class<?> clazz = Class.forName("com.cecdata.bdp2hive.sqoop.SqoopMainApplication");
+                Class<SqoopMainApplication> clazz = SqoopMainApplication.class;
+                Method method = clazz.getDeclaredMethod("main", String[].class);
+                method.setAccessible(true);
+                method.invoke(clazz.newInstance(), new Object[]{args});
+            } else if("log".equals(args[0].toLowerCase())){
+                Class<LogApplication> clazz = LogApplication.class;
                 Method method = clazz.getDeclaredMethod("main", String[].class);
                 method.setAccessible(true);
                 method.invoke(clazz.newInstance(), new Object[]{args});

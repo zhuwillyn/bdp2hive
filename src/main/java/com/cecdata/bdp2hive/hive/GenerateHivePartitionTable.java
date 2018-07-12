@@ -120,7 +120,6 @@ public class GenerateHivePartitionTable {
             sb.append("CECD_CNVT_TIME string)");
             sb.append(" partitioned by(SJYYLJGDM_PARTITION string)");
             sb.append(" row format delimited fields terminated by '^' stored as textfile");
-            System.out.println(sb.toString());
             logger.info("create table sql will be executing:{}", sb.toString());
             // 执行SQL语句创建hive分区表
             hiveStatement.execute(sb.toString());

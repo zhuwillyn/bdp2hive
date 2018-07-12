@@ -24,6 +24,18 @@ public class RefInfo {
     public RefInfo() {
     }
 
+    public RefInfo(String orgName, String orgCode, String databaseName, String tableName, String structCode, String databaseAddr, String port, String username, String password) {
+        this.orgName = orgName;
+        this.orgCode = orgCode;
+        this.databaseName = databaseName;
+        this.tableName = tableName;
+        this.structCode = structCode;
+        this.databaseAddr = databaseAddr;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+    }
+
     public RefInfo(String orgName, String orgCode, String databaseName, String tableName, String fieldName, String itemCode, String structCode, String databaseAddr, String port, String username, String password) {
         this.orgName = orgName;
         this.orgCode = orgCode;

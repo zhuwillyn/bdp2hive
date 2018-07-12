@@ -1,5 +1,6 @@
 package com.cecdata.bdp2hive.sqoop.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -12,10 +13,10 @@ import java.util.Properties;
  */
 public class PropertiesUtil {
 
+    static Properties properties = new Properties();
+
     public static String get(String key){
-        Properties properties = new Properties();
-        try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("info.properties");){
-            properties.load(inputStream);
+        try {
             String property = properties.getProperty(key);
             return property;
         } catch (Exception e){
@@ -24,4 +25,12 @@ public class PropertiesUtil {
         return "";
     }
 
+
+    static {
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("info.properties");){
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
